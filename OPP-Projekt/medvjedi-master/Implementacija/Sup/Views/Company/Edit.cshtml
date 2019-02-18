@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Izmjeni tvrtku";
+}
+
+@model EditCompanyViewModel
+
+<form asp-action="Update" asp-route-id="@Model.Company.Id" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if  (@ViewData["Success"] != null) {
+        <div class="alert alert-success">Tvrtka spremljena</div>
+    }
+    <a asp-action="Index" title="Povratak na prethodnu stranu">
+        <i class="arrow-left"></i>
+    </a>
+    <h3>Izmjeni tvrtku</h3>
+
+    <div class="form-group">
+        <label asp-for="Company.Name">Ime</label>
+        <input type="text" class="form-control" asp-for="Company.Name" placeholder="Ime tvrtke">
+    </div>
+    <div class="form-group">
+        <label asp-for="Company.Address">Adresa</label>
+        <input type="text" class="form-control" asp-for="Company.Address" placeholder="Adresa tvrtke">
+    </div>
+    <div class="form-group">
+        <label asp-for="CityId">Grad</label>
+        <select asp-for="CityId" asp-items="@(new SelectList((IEnumerable<City>) @ViewData["Cities"], "Id", "Name"))" class="form-control"></select>
+    </div>
+    <div class="form-group">
+        <label asp-for="Company.Logo">Logo</label>
+        <input type="text" class="form-control" asp-for="Company.Logo" placeholder="Company logo url">
+    </div>
+    <div class="form-group">
+        <label asp-for="Company.Description">Opis</label>
+        <textarea asp-for="Company.Description" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="Company.Website">Web stranica</label>
+        <input type="text" class="form-control" asp-for="Company.Website" placeholder="Company website">
+    </div>
+    <div class="form-group">
+        <label asp-for="UserIds">Dodaj članove</label>
+        <select multiple asp-for="UserIds" asp-items="@(new SelectList((IEnumerable<User>) @ViewData["Users"], "Id", "Name"))" class="form-control"></select>
+    </div>
+
+    
+
+    <button type="submit" class="btn btn-primary">Spremi</button>
+    <a asp-action="Index">
+        <button type="button" class="btn btn-secondary">Odustani</button>
+    </a>
+    
+  
+</form>

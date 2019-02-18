@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Dodaj obavijest";
+}
+
+@model AnnouncementViewModel
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Title">Naslov</label>
+        <input class="form-control" type="text" asp-for="Title" placeholder="Dodaj naslov">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Message">Tekst obavijesti</label>
+        <textarea class="form-control" asp-for="Message" placeholder="Unesi tekst"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="RecieverType">Tip primatelja</label>
+        <select asp-for="RecieverType" class="form-control" id="announcementRecieverType">
+            <option value="User">Korisnik</option>
+            <option value="Group">Grupa</option>
+        </select>
+    </div>
+    <div class="form-group" id="announcementUsers">
+        <label asp-for="UserId">Korisnik</label>
+        <select asp-for="UserId" asp-items="@(new SelectList((IEnumerable<User>) @ViewData["Users"], "Id", "Fullname"))" class="form-control"></select>
+    </div>
+    <div class="form-group" id="announcementGroups" style="display: none">
+        <label asp-for="GroupId">Grupa</label>
+        <select asp-for="GroupId" asp-items="@(new SelectList((IEnumerable<Group>) @ViewData["Groups"], "Id", "Name"))" class="form-control"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Objavi</button>
+</form>

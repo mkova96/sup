@@ -1,0 +1,47 @@
+@{
+  ViewData["Title"] = "Rezultati pretrage";
+}
+
+@model SearchActionViewModel
+
+<h3>Rezultati</h3>
+@if (Model != null) {
+  @if (Model.Savior)
+  {
+    <img src="http://www.jesuschristsavior.net/Savior.jpeg"/>
+  }
+  @if (Model.Patriot) 
+  {
+    <div style="display: none">
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/cUbCp2WgkYw?rel=0&autoplay=1" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    </div>
+  }
+  @if (Model.Boss)
+  {
+    <img src="https://scontent.fbud2-1.fna.fbcdn.net/v/t1.0-9/12227715_10207713240246076_1423730936232099627_n.jpg?oh=4202b29c8a1388631980a5b717d20a14&oe=5AE93F60"/>
+    <div style="display: none">
+      <iframe width="854" height="480" src="https://www.youtube.com/embed/IR4z1in5yHc?start=35&autoplay=1" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+    </div>
+  }
+}
+@if(Model != null && (Model.Companies.Any() || Model.Users.Any()))
+{
+  <ul class="list-group">
+    @if(Model.Companies != null && Model.Companies.Any()){
+      foreach (var c in Model.Companies)
+      {
+        <a class="list-group-item" asp-controller="Company" asp-action="Show" asp-route-id="@c.Id">@c.Name</a>
+      }
+    }
+    @if(Model.Users!= null && Model.Users.Any() ){
+      foreach (var u in Model.Users)
+      {
+        <a class="list-group-item" asp-controller="User" asp-action="Show" asp-route-id="@u.Id">@u.Fullname (@u.Email)</a>
+      }
+    }
+  </ul>
+}
+else
+{
+  <p>Nema rezultata o postavljenom upitu.</p>
+}

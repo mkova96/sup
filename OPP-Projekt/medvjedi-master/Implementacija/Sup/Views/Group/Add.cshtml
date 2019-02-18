@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Grupe";
+}
+
+@model GroupViewModel
+
+<h3>Dodaj grupu</h3>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name">Ime grupe</label>
+        <input type="text" class="form-control" asp-for="Name" placeholder="Ime grupe">
+    </div>
+    <div class="form-group">
+        <label asp-for="UserIds">Dodaj članove</label>
+        <select multiple asp-for="UserIds" asp-items="@(new SelectList((IEnumerable<User>) @ViewData["Users"], "Id", "Fullname"))" class="form-control"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Kreiraj grupu</button>
+</form>

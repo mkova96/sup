@@ -1,0 +1,215 @@
+﻿body {
+  padding-top: 50px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+  padding: 30px;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background: #343a40 !important;
+}
+
+.nav-link {
+    color: #343a40;
+}
+
+/*
+
+CLASS - ide tocka (.)
+ID    - ide hesteg (#)
+[IME_TAGA] npr. input, a, div, img...
+
+
+.[IME_KLASE] {
+    [IME_SVOJSTVA]: [VRIJEDNOST];
+}
+
+*/
+
+.custom-search {
+    width: 69%;
+    display: flex;
+}
+.custom-search-input {
+    flex: 1;
+}
+/*
+Unutar custom-search-inputa je input.
+*/
+.custom-search-input input.form-control {
+    width: 100%;
+    padding: 10px;
+}
+.custom-search-button {
+    flex-shrink: 0;
+    margin-left: 10px;
+}
+
+.custom-search-button button {
+    padding: 10px;
+}
+
+.Events {
+    
+}
+.Events__Event {
+    padding: 15px;
+    border-radius: 4px;
+    border: 1px solid #CCC;
+}
+.Events__Event + .Events__Event {
+    margin: 10px 0px 0px;
+}
+.Events__Event h3 {
+    margin: 0px 0px 5px;
+    padding: 0px;
+    line-height: 1;
+}
+.Events__Event h3 a {
+}
+.Events__Event__Meta {
+}
+.Events__Event__Description {}
+.Messages__Message{
+    color:rgba(0,0,0,.9);
+}
+.Events__Event__EventUsers__Attending{
+    display: inline-block;
+    margin: 0px 0px 0px 25px;    
+}
+
+.Messages__Message h5{
+    margin : 0px 0px 5px;
+    padding : 0px;
+    line-height: 1;
+}
+.Messages__Message h5 a { 
+    color: #333;
+    Font-weight: normal;
+}
+.Messages__Message_Sender {
+    display: flex;
+    color: black;
+    margin-right: 15px;
+    display: inline-block;
+}
+.Messages__Message_Receiver {
+    display: inline-block;
+}
+.Messages__Message p {
+    color: black
+}
+.Message_Text {
+    margin: 15px 0;    
+}
+.arrow-left{
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+.form-group-labels{
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+#over
+{
+    position:absolute;
+    width:100%;
+    height:100%;
+    text-align: center; /*handles the horizontal centering*/
+}
+/*handles the vertical centering*/
+.Centerer
+{
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.Centered
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+textarea.send-new-message {
+    margin: 15px 0px;
+}
+
+main.unreg h1 {
+    text-align: center;
+    margin: 0 0 150px;
+}
+
+main.unreg h1, main.unreg h4 {
+    color: #FFF;
+}
+
+.feature {
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, .7);
+    border-radius: 3px;
+    padding: 20px;
+    background: rgba(0,0,0,.3);
+    transition: background 300ms;
+}
+
+.feature:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.feature h4 {
+    color: #FFF;
+    text-shadow: 0 0 5px  #333;
+}
+
+.feature span {
+    font-size: 4rem;
+}
+
+.feature p {
+    color: #FFF;
+    line-height: 1.5;
+}
+
+footer {
+    padding: 2.5rem 0;
+    color: #999;
+    text-align: center;
+    background-color: #f9f9f9;
+    border-top: .05rem solid #e5e5e5;
+}
+
+/* 744DA9 */
+
+.bg-primary {
+    background-color: #744DA9 !important;
+}
+
+.btn-primary {
+    background-color: #744DA9 !important;
+    border-color: #744DA9 !important;
+}
+
+.text-primary {
+    color: #744DA9 !important;
+}
+
+a, a:hover, a:active {
+    color: #744DA9;
+}
+
+.border-primary {
+    border-color: #744DA9 !important;
+}

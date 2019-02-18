@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Izmjeni grupu";
+}
+
+@model EditGroupViewModel
+
+<h3>Izmjeni grupu</h3>
+
+<form asp-action="Update" asp-route-id="@Model.Group.Id" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    @if  (@ViewData["Success"] != null) {
+        <div class="alert alert-success">Grupa spremljena</div>
+    }
+    <div class="form-group">
+        <label asp-for="Group.Name">Ime Grupe</label>
+        <input type="text" class="form-control" asp-for="Group.Name" placeholder="Ime grupe">
+    </div>
+   <div class="form-group">
+      <label asp-for="UserIds">Dodaj članove</label>
+       <select asp-for="UserIds" asp-items="@(new SelectList((IEnumerable<User>) @ViewData["Users"], "Id", "Fullname"))" class="form-control"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Spremi</button>
+</form>

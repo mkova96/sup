@@ -1,0 +1,89 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Registracija";
+}
+
+<h2>@ViewData["Title"]</h2>
+<hr/>
+
+<form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label asp-for="Name">Ime</label>
+                <input asp-for="Name" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Surname">Prezime</label>
+                <input asp-for="Surname" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone">Telefon</label>
+                <input asp-for="Phone" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password">Lozinka</label>
+                <input asp-for="Password" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConfirmPassword">Potvrdite lozinku</label>
+                <input asp-for="ConfirmPassword" class="form-control"/>
+            </div>
+        </div>
+        <div class="col">
+            <h3>Tvrtka</h3>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(model => model.CompanyType, "existing", new {Class = "form-check-input", Id = "ExistingRadio", Name = "CompanyType"})
+                            <label class="form-check-label" for="ExistingRadio">Odaberite postojeću tvrtku</label>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(model => model.CompanyType, "new", new {Class = "form-check-input", Id = "NewRadio", Name = "CompanyType"})
+                            <label class="form-check-label" for="NewRadio">Stvorite novu tvrtku</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" id="registerSelectCompany">
+                <label asp-for="CompanyId">Tvrtka</label>
+                <select asp-for="CompanyId" asp-items="@(new SelectList((IEnumerable<Company>) @ViewData["Companies"], "Id", "Name"))" class="form-control"></select>
+            </div>
+            <div class="form-group" id="registerCreateCompnay" style="display: none">
+                <div class="form-group">
+                    <label asp-for="Company.Name">Ime </label>
+                    <input type="text" class="form-control" asp-for="Company.Name">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Company.Address">Adresa </label>
+                    <input type="text" class="form-control" asp-for="Company.Address">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Company.CityId">Grad </label>
+                    <select asp-for="Company.CityId" asp-items="@(new SelectList((IEnumerable<City>) @ViewData["Cities"], "Id", "Name"))" class="form-control"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Company.Logo">Logo </label>
+                    <input type="text" class="form-control" asp-for="Company.Logo">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Company.Description">Opis</label>
+                    <input type="text" class="form-control" asp-for="Company.Description">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Company.Website">Web stranica</label>
+                    <input type="text" class="form-control" asp-for="Company.Website">
+                </div>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Registriraj se</button>
+</form>

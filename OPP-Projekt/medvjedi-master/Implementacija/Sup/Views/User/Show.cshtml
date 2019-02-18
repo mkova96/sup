@@ -1,0 +1,16 @@
+@{
+    ViewData["Title"] = Model.Fullname;
+}
+
+@model User
+
+<h1>@Model.Fullname</h1>
+<p class="text-muted">Registirao se @Model.Published.ToString("dd. MM. yyyy.")</p>
+
+<div class="card">
+    <div class="card-body">
+        <div class="card-title">@Model.Company.Name</div>
+        <div class="card-subtitle text-muted">Tvrtka</div>
+        <a asp-controller="Company" asp-action="Show" asp-route-id="@Model.Company.Id">Pogledaj više</a>
+    </div>
+</div>

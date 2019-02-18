@@ -1,0 +1,59 @@
+@{
+  ViewData["Title"] = "Sastanci";
+}
+
+@model IEnumerable<Event>
+
+<h2>
+  Sastanci
+  <a asp-action="Add" class="btn btn-primary btn-sm">Dodaj novi sastanak</a>
+</h2>
+
+@if  (@ViewData["Success"] != null) {
+    <div class="alert alert-success">Sastanak dodan</div>
+}
+
+<div class="Events">
+    @if (!Model.Any())
+    {
+        <h5 style="color: #778899">Trenutno nema dodanih sastanaka.</h5>
+    }
+    @foreach (Event e in Model)
+    {
+        <div class="Events__Event">
+            <h3><a asp-action="Show" asp-route-id="@e.Id">@e.Title</a> <a asp-action="Edit" asp-route-id="@e.Id" class="btn btn-secondary btn-sm">Izmjeni</a>
+                <form asp-action="Delete" asp-route-id="@e.Id" method="POST" style="display: inline-block">
+                    <button type="submit" class="btn btn-danger btn-sm">Obriši</button>
+                </form>
+            </h3>
+            <div class="Events__Event__Meta">@e.Date.ToString("dd. MMM yyyy.") / @e.Time</div>
+            @if (@e.Description != null)
+            {
+                <div class="Events__Event__Description">
+                    @{
+                        var shortDesc = Strings.TruncateAtWord(e.Description, 100);
+                    }
+                    @shortDesc
+                </div>
+            }
+            <ul>
+                @foreach (EventUser eu in e.EventUser)
+                {
+                    <div class="Events__Event__EventUsers"> @eu.Users.Fullname
+                        <div class="Events__Event__EventUsers__Attending">
+                            @if (@eu.Attending == true)
+                            {
+                                <a href="#" class="badge badge-success">Prihvatio</a>
+                            }
+                            else
+                            {
+                                <a href="#" class="badge badge-danger">Nije prihvatio</a>
+                            }
+                        </div>
+                    </div>
+                }
+            </ul>
+        </div>
+
+    }
+</div>

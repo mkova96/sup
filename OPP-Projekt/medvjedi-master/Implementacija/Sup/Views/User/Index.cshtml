@@ -1,0 +1,39 @@
+@{
+  ViewData["Title"] = "Korisnici";
+}
+
+@model IEnumerable<User>
+
+<h2>
+  Popis korisnika
+  <a asp-action="Add" class="btn btn-primary btn-sm">Dodaj novog korisnika</a>
+</h2>
+
+@if  (@ViewData["Success"] != null) {
+    <div class="alert alert-success">Korisnik dodan</div>
+}
+
+<div calss="container">
+  @foreach (var u in Model) {
+      <div class="row">
+        <div class="col">
+          <details>
+            <summary><b>@u.Name @u.Surname</b></summary>
+            @if (@u.Company != null)
+            {
+              <p style="padding-left: 3em">Tvrtka: @u.Company.Name</p>
+            }
+            <p style="padding-left: 3em">E-mail: @u.Email</p>
+            <p style="padding-left: 3em">Telefon: @u.Phone</p>
+          </details>
+        </div>
+        <div class="Col" align="right">
+          <a asp-action="Edit" asp-route-id="@u.Id" class="btn btn-secondary btn-sm">Izmjeni</a>
+          <form asp-action="Delete" asp-route-id="@u.Id" method="POST" style="display: inline-block">
+            <button type="submit" class="btn btn-danger btn-sm">Obriši</button>
+          </form>
+        </div>
+      </div>
+    <hr/>
+  }
+</div>

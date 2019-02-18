@@ -1,0 +1,49 @@
+@inject SignInManager<User> SignInManager
+@{
+    ViewData["Title"] = "Informacije o tvrtci";
+}
+
+@model Company
+<div class="text-center">
+    <h1>
+        @Model.Name
+        @if (SignInManager.IsSignedIn(User)) {
+            <form asp-action="Delete" method="post" style="display: inline-block">
+                <a asp-action="Edit" class="btn btn-sm btn-warning"
+                asp-route-Id="@Model.Id">
+                    Edit                    
+                </a> 
+                <input type="hidden" name="Id" value="@Model.Id" />
+                <button type="submit" class="btn btn-danger btn-sm">
+                    Delete
+                </button>
+                <a asp-action="Index" class="btn btn-secondary btn-sm">Back</a>
+            </form>
+         }
+    </h1>
+</div>
+<div class="text-center">
+    <img src="@Model.Logo">
+</div>
+
+<h3>O tvrtci:</h3>
+<p>@Model.Description</p>
+
+<div class="text-center">
+    <h2>Kontakt osobe</h2>
+</div>
+
+
+<div style="display: flex">
+    @foreach (var item in Model.Users)
+    {
+        <div class="card" style="width: 25%'">
+            <div class="card-body">
+                <div class="card-title">@item.Fullname</div>
+                <div class="card-subtitle text-muted">Kontakt osoba</div>
+                <a asp-controller="User" asp-action="Show" asp-route-id="@item.Id">Pogledaj više</a>
+            </div>
+        </div>
+    
+    }
+</div>

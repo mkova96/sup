@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Početna";
+}
+
+@model IEnumerable<Announcement>
+
+<h2>Obavijesti</h2>
+
+@if (!Model.Any())
+{
+    <h5 style="color: #778899">Trenutno nema dodanih obavijesti.</h5>
+}
+
+
+<ul class="list-group">
+    @foreach (var a in Model) {
+  
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">@a.Title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    @if (@a.User != null)
+                    {
+                        <span>Objavio @a.User?.Fullname</span>
+                    } dana @a.Published.ToString("dd. MM. yyyy.")
+                </h6>
+                <p class="card-text">@a.Message</p>
+            </div>
+        </div>
+    }
+</ul>

@@ -1,0 +1,130 @@
+﻿@{
+    ViewData["Title"] = "Početna stranica";
+}
+
+@model IEnumerable<User>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Sup</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-multiselect/css/bootstrap-multiselect.css" />
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+</head>
+<body>
+<header class="navbar fixed-top navbar-dark" style="background-color: #000000">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#"><h4>SUP</h4></a>
+        </div>
+        <div>
+            <a asp-controller="Account" asp-action="Register" type="a" class="btn btn-outline-info">Registracija</a>
+            <a asp-controller="Account" asp-action="Login" class="btn btn-outline-success">Prijava</a>
+        </div>
+    </div>
+</header>
+
+<main class="unreg">
+    <div class="jumbotron jumbotron-fluid" style="min-height: 100vh; background-image: url(/images/bg.jpg); background-size: cover">
+        <div class="container">
+            <h1 class="display-4"><strong>Sustav udruge poduzetnika</strong></h1>
+            <div class="row">
+                <div class="col feature">
+                    <h4>Upoznajte industriju</h4>
+                    <span class="ion-ios-information" style="color: #00B7C3"></span>
+                    <p>Upoznajte druge tvrtke i njihove predstavnike unutar svoje industrije, pokrenite suradnju i ostvarite veći profit.</p>
+                </div>
+                <div class="col feature">
+                    <h4>Direktna komunikacija</h4>
+                    <span class="ion-ios-chatboxes" style="color: #E81123"></span>
+                    <p>Sustav omogućuje direktnu komunikaciju članova udruge putem poruka i obavijesti. Vrlo brzo primite ili pošaljite nove vijesti.</p>
+                </div>
+                <div class="col feature">
+                    <h4>Smislene grupe</h4>
+                    <span class="ion-ios-people" style="color: #744DA9"></span>
+                    <p>Korisnici mogu definirati lokalne grupe s drugim korisnicima s obzirom na slične djelatnosti, područja industrije. Zajedno smo jači!</p>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center">
+                <p class="lead">
+                    <div style="position: absolute; bottom: 70px; left: 50%; transform: translateX(-50%)">
+                        <a class="btn btn-secondary btn-lg" href="#Usr-Cmp" role="button">
+                            Istraži
+                        </a>
+                         <a asp-controller="Account" asp-action="Register" class="btn btn-primary btn-lg" role="button">
+                            Registriraj se
+                        </a>
+                    </div>
+                </p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div id="Usr-Cmp" style="text-align: center; padding: 10px">
+    <h2>Neke prijavljene tvrtke i korisnici</h2>
+</div>
+<div class="cards" style="display: flex; justify-content: center; width: 100%">
+    <div class="cards-users" style="padding: 20px">
+       <div class="row">
+           @{
+               var i = 0;
+           }
+            @foreach (User u in (IEnumerable<User>) ViewData["Users"])
+        {
+            i++;
+            <a asp-controller="User" asp-action="Show" asp-route-id="@u.Id" class="card border-primary col-sm">
+                <div class="card-body text-primary">
+                    <h5 class="card-title">@u.Fullname</h5>
+                    @if (@u.Company != null)
+                    {
+                        <p class="card-text" style="padding-left: 1em">@u.Company.Name</p>
+                    }
+                </div>
+            </a>
+            @if (i % 2 == 0) {
+                <div class="w-100"></div>
+            }
+        }
+       </div>
+    </div>
+    <div class="cards-companies" style="padding: 20px">
+        <div class="row">
+            @{
+                i = 0;
+            }
+                @foreach (Company c in (IEnumerable<Company>) ViewData["Companies"])
+        {
+            i++;
+            <a asp-controller="Company" asp-action="Show" asp-route-id="@c.Id" class="card border-success col-sm">
+                <div class="card-body text-success">
+                    <h5 class="card-title">@c.Name</h5>
+                    <p class="card-text" style="padding-left: 1em">@c.Address, @c.City.Name</p>
+                </div>
+            </a> 
+            @if (i % 2 == 0) {
+                <div class="w-100"></div>
+            }
+        }
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>Kreirano na <a href="http://fer.hr">FER</a>.</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/bootstrap-multiselect/js/bootstrap-multiselect.js" ></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+﻿@inject SignInManager<User> SignInManager
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - Sup</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/site.css"/>
+    <link rel="stylesheet" href="~/lib/bootstrap-multiselect/css/bootstrap-multiselect.css"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-primary fixed-top">
+    <div class="container">
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">SUP</a>
+        }
+        else
+        {
+            <a class="navbar-brand" asp-controller="UnregHome" asp-action="Index">SUP</a>   
+        }
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#supNavbar" aria-controls="supNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-between" id="supNavbar">
+            <form class="form-inline custom-search" asp-controller="Search" asp-action="SearchAction">
+                <div class="custom-search-input">
+                    <input class="form-control" name="SearchString" type="text" placeholder="Pretraži" aria-label="Search">
+                </div>
+                <div class="custom-search-button">
+                    <button class="btn btn-outline-light" type="submit">Pretraži</button>
+                </div>
+            </form>
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+    </div>
+</nav>
+<main role="main" class="body-content">
+    <div class="container-fluid">
+        <div class="row">
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="col">
+                    <div class="nav flex-column nav-pills" aria-orientation="vertical">
+                        <a class="nav-link active" asp-controller="Home" asp-action="Index">Početna</a>
+                        <a class="nav-link" asp-controller="Manage" asp-action="Index">Profil</a>
+                        <a class="nav-link" asp-controller="Message" asp-action="Index">Poruke</a>
+                        <a class="nav-link" asp-controller="Group" asp-action="Index">Grupe</a>
+                        <a class="nav-link" asp-controller="Event" asp-action="Index">Sastanci</a>
+                        <a class="nav-link" asp-controller="Announcement" asp-action="Index">Obavijesti</a>
+                        <a class="nav-link" asp-controller="Settings" asp-action="Index">Postavke</a>
+                    </div>
+                </div>
+            }
+            <div class="col-10">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <footer>
+        <p>&copy; 2017 - Sup</p>
+    </footer>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/lib/bootstrap-multiselect/js/bootstrap-multiselect.js"></script>
+@RenderSection("Scripts", required: false)
+</body>
+</html>

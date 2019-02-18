@@ -1,0 +1,27 @@
+@{
+  ViewData["Title"] = "Poruke";
+}
+
+@model MessageShowViewModel
+
+<h2>
+  Poruke s @Model.Receiver.Fullname
+</h2>
+
+@if  (@ViewData["Success"] != null) {
+    <div class="alert alert-success">Poruka poslana</div>
+}
+<ul class="list-group">
+  @foreach (var m in Model.Messages) {
+    <ul class="list-group">
+        <li class="list-group-item"><strong>@m.Sender.Fullname</strong>: @m.Content</li>
+    </ul>
+     
+  }
+</ul>
+<form asp-action="CreateFromShow" asp-route-id="@Model.Receiver.Id" asp-route-MessageId="@Model.CurrentMessageId" method="post">
+  <div class="Message_Text">
+      <textarea class="form-control send-new-message" asp-for="Content" placeholder="Unesi novu poruku"></textarea>
+      <button type="submit" class="btn btn-primary">Odgovori</button>
+  </div>
+</form>

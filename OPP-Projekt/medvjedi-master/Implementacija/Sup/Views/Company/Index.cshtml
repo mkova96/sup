@@ -1,0 +1,25 @@
+@{
+  ViewData["Title"] = "Tvrtke";
+}
+
+@model IEnumerable<Company>
+
+<h2>
+  Lista tvrtki
+</h2>
+
+@if  (@ViewData["Success"] != null) {
+    <div class="alert alert-success">Tvrtka dodana</div>
+}
+
+<ul>
+  @foreach (Company c in Model) {
+    <li>
+      <a asp-action="Show" asp-route-id="@c.Id">@c.Name</a>
+    </li>
+  }
+</ul>
+
+<div class="text-center">
+    <a asp-action="Add" class="btn btn-primary">Dodaj tvrtku</a>
+</div>

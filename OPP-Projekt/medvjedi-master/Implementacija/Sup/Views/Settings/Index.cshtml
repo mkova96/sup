@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Postavke";
+}
+
+@model Settings
+
+<h2>
+    Postavke
+</h2>
+<form asp-action="Update" method="post">
+    @foreach(UserSetting p in (IEnumerable<UserSetting>) ViewData["PossibleSettings"]){
+        <div class="form-group">
+            <label for="@p.Name">@p.Label</label>
+            @if (p.Type.Equals("Input"))
+            {
+                <input value = "@p.Value" type="text" class="form-control" name="@p.Name" id="@p.Name" placeholder="Upišite @p.Label.ToLower()">
+            }
+            @if (p.Type.Equals("Select"))
+            {
+                <select value = "@p.Value" name="@p.Name" id="@p.Name" asp-items="@p.Options" class="form-control"></select>
+            }
+        </div>
+        }
+    <button type="submit" class="btn btn-primary">Spremi</button>
+</form>

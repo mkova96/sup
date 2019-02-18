@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Dodaj sastanak";
+}
+
+@model EventViewModel
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Title">Naziv</label>
+        <input type="text" class="form-control" asp-for="Title" placeholder="Unesite naziv sastanka">
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Opis</label>
+        <textarea class="form-control" asp-for="Description" placeholder="Unesite opis"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="Date">Datum</label>
+        <input type="date" class="form-control" asp-for="Date" placeholder="Unesite datum održavanja">
+    </div>
+    <div class="form-group">
+        <label asp-for="Time">Vrijeme</label>
+        <input type="time" class="form-control" asp-for="Time" placeholder="Unesite vrijeme sastanka">
+    </div>
+     <div class="form-group">
+        <label asp-for="UserIds">Dodaj članove</label>
+        <select multiple asp-for="UserIds" asp-items="@(new SelectList((IEnumerable<User>) @ViewData["Users"], "Id", "Fullname"))" class="form-control"></select>
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj</button>
+</form>

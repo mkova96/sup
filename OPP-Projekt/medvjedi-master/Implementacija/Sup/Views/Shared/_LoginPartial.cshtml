@@ -1,0 +1,23 @@
+@inject SignInManager<User> SignInManager
+@inject UserManager<User> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <form asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a asp-controller="Manage" asp-action="Index" title="Manage" class="nav-link">@UserManager.GetUserName(User)</a>
+            </li>
+            <li class="nav-item">
+                <button type="submit" class="btn btn-link nav-link">Odjava</button>
+            </li>
+        </ul>
+    </form>
+}
+else
+{
+    <ul class="navbar-nav">
+        <li class="nav-item"><a asp-controller="Account" asp-action="Register" class="nav-link">Registracija</a></li>
+        <li class="nav-item"><a asp-controller="Account" asp-action="Login" class="nav-link">Prijava</a></li>
+    </ul>
+}

@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Obavijesti";
+}
+
+@model IEnumerable<Announcement>
+
+<h2>
+    Lista obavijesti
+    <a asp-action="Add" class="btn btn-primary btn-sm">Kreiraj novu obavijest</a>
+</h2>
+
+@if  (@ViewData["Success"] != null) {
+    <div class="alert alert-success">Obavijest kreirana</div>
+}
+
+@if (!Model.Any())
+{
+    <h5 style="color: #778899">Trenutno nema dodanih obavijesti.</h5>
+}
+
+
+<ul class="list-group">
+    @foreach (Announcement a in Model)
+    {
+        <li class="list-group-item">
+            <h3>
+                @a.Title
+                <a asp-action="Edit" asp-route-id="@a.Id" class="btn btn-secondary btn-sm">Izmjeni</a>
+            </h3>
+            @a.Message
+        </li>
+    }
+</ul>
